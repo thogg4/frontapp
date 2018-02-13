@@ -32,7 +32,7 @@ module Frontapp
       # bcc              array (optional)    List of the recipient handles who will receive a blind copy of this message
       # ------------------------------------------------
       def send_message(channel_id, params)
-        cleaned = params.permit(:author_id,
+        cleaned = params.front_permit(:author_id,
                                 :subject,
                                 :body,
                                 :text,
@@ -65,7 +65,7 @@ module Frontapp
       # bcc              array (optional)    List of the recipient handles who will receive a blind copy of this message
       # ------------------------------------------------
       def send_reply(conversation_id, params)
-        cleaned = params.permit(:author_id,
+        cleaned = params.front_permit(:author_id,
                                 :subject,
                                 :body,
                                 :text,
@@ -98,7 +98,7 @@ module Frontapp
       # metadata.headers      object (optional)  Custom object where any internal information can be stored
       # ----------------------------------------------------
       def receive_custom_message(channel_id, params)
-        cleaned = params.permit({ sender: [:contact_id, :name, :handle] },
+        cleaned = params.front_permit({ sender: [:contact_id, :name, :handle] },
                                 :subject,
                                 :body,
                                 :body_format,
@@ -137,7 +137,7 @@ module Frontapp
       # metadata.should_skip_rules  boolean (optional)  Whether or not the rules should apply to this message. (Default: true)
       # -----------------------------------------------------------
       def import_message(inbox_id, params)
-        cleaned = params.permit({ sender: [:handle, :name, :author_id] },
+        cleaned = params.front_permit({ sender: [:handle, :name, :author_id] },
                                 :to,
                                 :cc,
                                 :bcc,

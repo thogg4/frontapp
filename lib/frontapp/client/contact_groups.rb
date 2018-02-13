@@ -12,7 +12,7 @@ module Frontapp
       # name          string            Name of the group
       # -------------------------------------------
       def create_contact_group!(params = {})
-        cleaned = params.permit(:name)
+        cleaned = params.front_permit(:name)
         create("contact_groups", cleaned)
       end
 
@@ -47,7 +47,7 @@ module Frontapp
       # contact_ids  array  List of ids or aliases of the contacts to add in the requested group
       # --------------------------------------------
       def add_contacts_to_contact_group!(group_id, params = {})
-        cleaned = params.permit(:contact_ids)
+        cleaned = params.front_permit(:contact_ids)
         create_without_response("contact_groups/#{group_id}/contacts", cleaned)
       end
     end

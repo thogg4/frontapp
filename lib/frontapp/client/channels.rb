@@ -30,7 +30,7 @@ module Frontapp
       # settings.webhook_url  string (optional) custom type only. URL to which will be sent the replies of a custom message.
       # ---------------------------------------------------
       def update_channel!(channel_id, params = {})
-        cleaned = params.permit({ settings: [:webhook_url] })
+        cleaned = params.front_permit({ settings: [:webhook_url] })
         update("channels/#{channel_id}", cleaned)
       end
 
@@ -50,7 +50,7 @@ module Frontapp
       # settings.webhook_url  string (optional)  custom type only. URL to which will be sent the replies of a custom message.
       # ----------------------------------------------------
       def create_channel!(inbox_id, params = {})
-        cleaned = params.permit(:type, { settings: [:webhook_url] })
+        cleaned = params.front_permit(:type, { settings: [:webhook_url] })
         create("inboxes/#{inbox_id}/channels", cleaned)
       end
 

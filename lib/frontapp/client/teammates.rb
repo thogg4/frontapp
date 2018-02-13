@@ -31,7 +31,7 @@ module Frontapp
       # is_available  boolean (optional)  New availability status
       # ----------------------------------------------
       def update_teammate!(teammate_id, params = {})
-        cleaned = params.permit(:username, :first_name, :last_name, :is_admin, :is_available)
+        cleaned = params.front_permit(:username, :first_name, :last_name, :is_admin, :is_available)
         update("teammates/#{teammate_id}", cleaned)
       end
 
@@ -48,7 +48,7 @@ module Frontapp
       # q.statuses  array (optional)   List of the statuses of the conversations you want to list
       # ----------------------------------------------
       def get_teammate_conversations(teammate_id, params = {})
-        cleaned = params.permit({ q: [:statuses] })
+        cleaned = params.front_permit({ q: [:statuses] })
         list("teammates/#{teammate_id}/conversations", cleaned)
       end
 

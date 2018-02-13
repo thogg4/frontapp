@@ -32,7 +32,7 @@ module Frontapp
       # group_names  array (optional)    List of all the group names the contact belongs to. It will automatically create missing groups.
       # --------------------------------------------
       def update_contact!(contact_id, params = {})
-        cleaned = params.permit(:name,
+        cleaned = params.front_permit(:name,
                                 :description,
                                 :avatar_url,
                                 :is_spammer,
@@ -53,7 +53,7 @@ module Frontapp
       # handles      array               List
       # --------------------------------------------
       def create_contact!(params = {})
-        cleaned = params.permit(:name,
+        cleaned = params.front_permit(:name,
                                 :description,
                                 :avatar_url,
                                 :is_spammer,
@@ -84,7 +84,7 @@ module Frontapp
       # q.statuses  array (optional)   List of the statuses of the conversations you want to list
       # ----------------------------------------------
       def get_contact_conversations(contact_id, params = {})
-        cleaned = params.permit({ q: [:statuses] })
+        cleaned = params.front_permit({ q: [:statuses] })
         list("contacts/#{contact_id}/conversations", cleaned)
       end
 
@@ -101,7 +101,7 @@ module Frontapp
       # source  enum    Can be 'twitter’, 'email’ or 'phone’.
       # ---------------------------
       def add_contact_handle!(contact_id, params = {})
-        cleaned = params.permit(:handle, :source)
+        cleaned = params.front_permit(:handle, :source)
         create_without_response("contacts/#{contact_id}/handles", cleaned)
       end
 
@@ -118,7 +118,7 @@ module Frontapp
       # source  enum    Can be 'twitter’, 'email’ or 'phone’.
       # ---------------------------
       def delete_contact_handle!(contact_id, params = {})
-        cleaned = params.permit(:handle, :source)
+        cleaned = params.front_permit(:handle, :source)
         delete("contacts/#{contact_id}/handles", cleaned)
       end
 
@@ -144,7 +144,7 @@ module Frontapp
       # body       string  Content of the note
       # ------------------------------
       def add_contact_note!(contact_id, params = {})
-        cleaned = params.permit(:author_id, :body)
+        cleaned = params.front_permit(:author_id, :body)
         create("contacts/#{contact_id}/notes", cleaned)
       end
 
